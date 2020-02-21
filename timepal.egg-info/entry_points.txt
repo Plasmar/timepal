@@ -1,4 +1,0 @@
-
-        [console_scripts]
-        timepal=timepal:cli
-    
