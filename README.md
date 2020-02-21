@@ -19,7 +19,7 @@ If there was some way to quickly mark down time without leaving the CLI, and wit
 ## Installation
 
 - Download and extract the project or clone it using git. 
-- (optional) toggle the virtual environment `source ./venv/bin/activate`
+- (optional) toggle the virtual environment`python3 -m venv venv && source ./venv/bin/activate` 
 - Install with `pip install -e .` 
 
 ## Usage Options
