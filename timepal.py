@@ -13,8 +13,6 @@ import csv
 import os
 import click
 import datetime
-from tabulate import tabulate
-import pandas as pd
 
 # Set up the datetime object for creating filenames
 now = datetime.date.today()
@@ -66,21 +64,21 @@ def dump(start, end):
     delta = edate - sdate
 
     for i in range(delta.days + 1):
-        iter_day = sdate + timedelta(days=i)
+        iter_day = sdate + datetime.timedelta(days=i)
+        iter_file = str(iter_day) + '.csv'
         if not os.path.isfile('data/' + iter_file):
             print("\n[*] No data for  " + iter_file +'\n')
             continue
-        df = pd.read_csv(iter_file)
-        print(tabulate(df, tablefmt='psql')
+        with open('data/' + iter_file, 'r') as readfile:
+            reader = csv.reader(readfile)
+            for row in reader:
+                print(row)
 
-
-        # with open('data/' + str(start) + '.csv', 'r') as readfile:
-            # reader = csv.reader(readfile)
-            # for row in reader:
-                # print(row)
 
 # Add the two subcommands to the Click group formed at the top
-cli = click.CommandCollection(sources=[log, dump])
+cli.add_command(log)
+cli.add_command(dump)
+
 
 if __name__ == '__main__':
     cli()
